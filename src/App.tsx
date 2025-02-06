@@ -3,45 +3,53 @@ import './App.css';
 import KakaoMap from '@components/KakaoMap';
 import Layout from '@components/Layout';
 import { fetchCenterData } from '@utils/api';
-import { dataFormatterArray } from '@utils/formatters';
+import {
+  convertAddressesToCoordinates,
+  dataFormatterArray,
+} from '@utils/formatters';
 import { useEffect, useState } from 'react';
-import { filteredRegions } from '@utils/filters';
 import styled from 'styled-components';
 
 function App() {
   const [region, setRegion] = useState<string[]>([]);
   const [selectedRegion, setSelectedRegion] = useState('');
-  const [municipality, setMunicipality] = useState<string[]>([]);
-  const [municipalityOptions, setMunicipalityOptions] = useState<string[]>([]);
-  const [selectedMunicipality, setSelectedMunicipality] = useState('');
-
+  const [addresses, setAddresses] = useState<string[]>([]);
+  const [center, setCenter] = useState<{ lat: number; lng: number }>({
+    lat: 37.5665,
+    lng: 126.978,
+  });
   const getCenterInfo = async () => {
     const centerInfo = await fetchCenterData();
+    const addresses: string[] = dataFormatterArray(centerInfo, [
+      'cntrRoadNmAddr',
+    ]);
+    setAddresses(addresses);
     const regions: string[] = dataFormatterArray(centerInfo, ['lclgvNm']);
     const region = regions.map((region) => region.split(' ')[0]);
     const uniqueRegion: string[] = [...new Set(region)];
     setRegion(uniqueRegion);
-    setMunicipality(regions);
   };
+
+  const getSelectedCenter = async () => {
+    const regionCoordinate = await convertAddressesToCoordinates([
+      selectedRegion,
+    ]);
+    setCenter(regionCoordinate[0]);
+  };
+
   useEffect(() => {
     getCenterInfo();
   }, []);
 
   useEffect(() => {
     if (selectedRegion) {
-      const municipalityFilter = filteredRegions(municipality, selectedRegion);
-      setMunicipalityOptions(municipalityFilter);
+      getSelectedCenter();
     } else {
-      setMunicipalityOptions([]);
     }
   }, [selectedRegion]);
 
   const onRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRegion(e.target.value);
-  };
-
-  const onMunicipalityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedMunicipality(e.target.value);
   };
 
   return (
@@ -55,16 +63,10 @@ function App() {
             seletedOption={selectedRegion}
           />
         )}
-        {municipalityOptions && (
-          <FilterDropdown
-            value="시/군/구를 선택해주세요."
-            onChange={onMunicipalityChange}
-            options={municipalityOptions}
-            seletedOption={selectedMunicipality}
-          />
-        )}
       </Filters>
-      <KakaoMap la="37.365264512305174" lo="127.10676860117488" />
+      {addresses.length > 1 && (
+        <KakaoMap addresses={addresses} center={center} />
+      )}
     </Layout>
   );
 }
