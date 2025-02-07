@@ -56,7 +56,32 @@ declare global {
     }
 
     export class Marker {
-      constructor(options: { position: LatLng; map: Map });
+      constructor(options: {
+        position: LatLng;
+        map: Map;
+        image: kakao.maps.MarkerImage;
+      });
+      setMap(map: map | null): void;
+    }
+
+    export class Size {
+      constructor(width: number, height: number);
+      width: number;
+      height: number;
+    }
+
+    export class Point {
+      constructor(x: number, y: number);
+      x: number;
+      y: number;
+    }
+
+    export class MarkerImage {
+      constructor(
+        imageSrc: string,
+        imageSize: Size,
+        imageOption?: { offset: Point }
+      );
     }
 
     export class InfoWindow {
