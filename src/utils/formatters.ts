@@ -1,5 +1,5 @@
 // 객체가 들어가있는 배열에서 객체마다 원하는 키-값만 뽑아내는 함수
-export const dataFormatterObject = (data: [], filter: string[]) => {
+export const dataFormatterObject = (data: CenterInfo[], filter: string[]) => {
   return data.map((item) =>
     Object.fromEntries(
       Object.entries(item).filter(([key]) => filter.includes(key))
@@ -14,8 +14,12 @@ export const dataFormatterObject = (data: [], filter: string[]) => {
 3. filter(([key]) => filter.includes(key)): 키로 필터링
 4. Object.fromEntries(): 배열 -> 객체 변환 메서드
 */
+type KeyOfCenterInfo = keyof CenterInfo;
 
-export const dataFormatterArray = (data: [], filter: string[]) => {
+export const dataFormatterArray = (
+  data: CenterInfo[],
+  filter: KeyOfCenterInfo[]
+) => {
   return data.map((item) => filter.map((key) => item[key])).flat(); // 2차원 배열을 1차원 배열로 평평하게 만듦
 };
 export const checkKakaoApi = () => {
@@ -26,6 +30,12 @@ export const checkKakaoApi = () => {
       reject('카카오맵 API 로딩 실패');
     }
   });
+};
+
+export const formatRegions = (centerInfo: CenterInfo[]): string[] => {
+  const regions: string[] = dataFormatterArray(centerInfo, ['lclgvNm']);
+  const region = regions.map((region) => region.split(' ')[0]);
+  return [...new Set(region)];
 };
 
 export const convertAddressesToCoordinates = async (

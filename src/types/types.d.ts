@@ -8,6 +8,38 @@ declare global {
     kakao: typeof kakao;
   }
 
+  type CenterInfo = {
+    appSrvcNm: string;
+    bfhdRsvtPrdExpln: string;
+    bscCrgExpln: string;
+    btjrOprRgnNm: string;
+    cntrId: string;
+    cntrLotnoAddr: string;
+    cntrNm: string;
+    cntrRoadNmAddr: string;
+    cntrTelno: string;
+    dayVhclUtztnNmtm: string;
+    exchrgCrgExpln: string;
+    hldVhclTcntom: string;
+    lat: string;
+    lclgvNm: string;
+    lot: string;
+    mngInstNm: string;
+    mngInstTelno: string;
+    rsvtGdMttr: string;
+    rsvtSiteUrlAddr: string;
+    stdgCd: string;
+    totCrtrYmd: string;
+    utztnTrgtExpln: string;
+    wkdyOprBgngTm: string;
+    wkdyOprEndTm: string;
+    wkdyRsvtBgngTm: string;
+    wkdyRsvtEndTm: string;
+    wkndOperHrExpln: string;
+    wkndOperYn: string;
+    wtjrOprRgnNm: string;
+  };
+
   // kakao.maps.services 네임스페이스 확장
   namespace kakao.maps.services {
     export interface AddressSearchResult {
@@ -60,6 +92,7 @@ declare global {
         position: LatLng;
         map: Map;
         image: kakao.maps.MarkerImage;
+        clickable: boolean;
       });
       setMap(map: map | null): void;
     }
@@ -87,6 +120,13 @@ declare global {
     export class InfoWindow {
       constructor(options: { content: string });
       open(map: Map, marker: Marker): void;
+    }
+    export namespace event {
+      export function addListener(
+        target: any,
+        type: string,
+        callback: (...args: any[]) => void
+      ): void;
     }
   }
 }

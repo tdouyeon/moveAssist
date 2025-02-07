@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { convertAddressesToCoordinates } from '@utils/formatters';
+import styled from 'styled-components';
 
 interface KaMapType {
   addresses: string[];
   center: { lat: number; lng: number };
+  clickMarker: (index: number) => void;
 }
 
-function KakaoMap({ addresses, center }: KaMapType) {
+function KakaoMap({ addresses, center, clickMarker }: KaMapType) {
   const [locations, setLocations] = useState<{ lat: number; lng: number }[]>(
     []
   );
@@ -62,20 +64,36 @@ function KakaoMap({ addresses, center }: KaMapType) {
 
     const map = new window.kakao.maps.Map(mapRef.current, mapOption);
 
-    locations.forEach((location) => {
-      new window.kakao.maps.Marker({
+    locations.forEach((location, index) => {
+      const marker = new window.kakao.maps.Marker({
         map: map,
         position: new window.kakao.maps.LatLng(location.lat, location.lng),
         image: markerImage,
+        clickable: true,
+      });
+
+      kakao.maps.event.addListener(marker, 'click', function () {
+        clickMarker(index);
       });
     });
   }, [locations, center]);
 
   return (
     <div>
-      <div ref={mapRef} style={{ width: '100%', height: '350px' }} />
+      <MapContainer ref={mapRef} />
     </div>
   );
 }
+
+const MapContainer = styled.div`
+  width: 80vw;
+  height: 80vh;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100vh;
+  }
+`;
 
 export default KakaoMap;

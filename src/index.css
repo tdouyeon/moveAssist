@@ -15,14 +15,18 @@
 @font-face {
   font-family: 'SCDream4';
   src: url('/fonts/SCDream4.otf') format('truetype');
-  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SCDream5';
+  src: url('/fonts/SCDream5.otf') format('truetype');
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SCDream7';
   src: url('/fonts/SCDream7.otf') format('truetype');
-  font-weight: normal;
   font-style: normal;
 }
 * {
@@ -42,8 +46,12 @@ h1 {
 }
 
 h1,
-.highlight-text {
+h2 {
   font-family: 'SCDream7', sans-serif;
+}
+
+.subTitle {
+  font-family: 'SCDream5', sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
