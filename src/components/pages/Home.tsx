@@ -86,6 +86,12 @@ function Home() {
     <div>
       {centerInfo.length > 0 && (
         <div>
+          <Heading>교통약자이동지원센터 정보</Heading>
+          <Description>
+            지방자치단체의 교통약자이동지원센터에 관한 정보를 확인하실 수
+            있습니다. <br />
+            수도권은 포함되지 않습니다.
+          </Description>
           <Filters>
             <FilterDropdown
               value="지역을 선택해주세요."
@@ -111,6 +117,19 @@ function Home() {
     </div>
   );
 }
+const Heading = styled.h1`
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: #333;
+`;
+
+const Description = styled.div`
+  text-align: center;
+  color: #666;
+  margin-bottom: 40px;
+`;
 
 const Filters = styled.div`
   display: flex;
