@@ -86,9 +86,12 @@ function KakaoMap({ addresses, center, clickMarker }: KaMapType) {
 }
 
 const MapContainer = styled.div`
-  width: 80vw;
+  width: 90vw;
   height: 80vh;
   box-sizing: border-box;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     width: 100%;

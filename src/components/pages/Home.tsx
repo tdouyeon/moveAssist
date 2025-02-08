@@ -1,6 +1,5 @@
 import FilterDropdown from '@components/FilterDropdown';
 import KakaoMap from '@components/KakaoMap';
-import Layout from '@components/Layout';
 import { fetchCenterData } from '@utils/api';
 import {
   convertAddressesToCoordinates,
@@ -115,6 +114,7 @@ function Home() {
 
 const Filters = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 export default Home;

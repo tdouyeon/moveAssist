@@ -28,22 +28,24 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 };
 
 const FilterContainer = styled.div`
-  width: 220px;
+  width: 90vw;
   margin: 10px 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   font-family: 'Arial', sans-serif;
   margin-right: 6px;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
 `;
 
 const Select = styled.select`
-  width: 100%;
-  padding: 10px;
+  width: 200px;
+  padding: 12px;
   font-size: 14px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
   color: #333;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -60,6 +62,10 @@ const Select = styled.select`
   &:focus {
     outline: none;
     border-color: #5f0080;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
   }
 `;
 
