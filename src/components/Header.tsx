@@ -10,7 +10,7 @@ const Header = () => {
       </Container>
       <Nav>
         <NavItem href="/">이동케어</NavItem>
-        <NavItem href="/Facilities">역사 내 시설</NavItem>
+        <NavItem href="/facilities">역사 내 시설</NavItem>
         <NavItem href="/about">소개</NavItem>
       </Nav>
     </HeaderContainer>
