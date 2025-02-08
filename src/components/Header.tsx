@@ -73,4 +73,8 @@ const NavItem = styled.a`
   &:hover {
     color: #5f0080;
   }
+
+  @media (max-width: 768px) {
+    margin-left: 0rem;
+  }
 `;
