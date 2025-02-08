@@ -35,7 +35,7 @@ function Facilites() {
         />
         <ClearButton onClick={clearSearch}>×</ClearButton>
       </SearchInputWrapper>
-      <div>없는 노선이 있을 수 있으니 참고해 주세요.</div>
+      <InfoText>없는 노선이 있을 수 있으니 참고해 주세요.</InfoText>
       <Table>
         <thead>
           <tr>
@@ -111,6 +111,12 @@ const SearchInputWrapper = styled.div`
   position: relative;
   width: 220px;
   margin: 10px 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -124,6 +130,10 @@ const SearchInput = styled.input`
   &:focus {
     border-color: #5f0080;
     outline: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
   }
 `;
 
@@ -139,6 +149,21 @@ const ClearButton = styled.button`
   color: #ccc;
   &:hover {
     color: #5f0080;
+  }
+
+  @media (max-width: 768px) {
+    right: 60px;
+  }
+`;
+
+const InfoText = styled.div`
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    margin-top: 15px;
   }
 `;
 
