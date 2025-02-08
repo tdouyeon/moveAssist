@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const apiTransportSupportClient = axios.create({
-  baseURL: 'http://apis.data.go.kr/B551982/tsdo',
+  baseURL: 'https://apis.data.go.kr/B551982/tsdo',
   timeout: 10000,
 });
 
 const apiKorailFacilitiesInfoClient = axios.create({
-  baseURL: 'http://apis.data.go.kr/B551457/convenience',
+  baseURL: 'https://apis.data.go.kr/B551457/convenience',
   timeout: 10000,
 });
 

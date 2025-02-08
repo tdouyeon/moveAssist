@@ -84,7 +84,7 @@ function Home() {
 
   return (
     <div>
-      {centerInfo.length > 0 && (
+      {centerInfo && centerInfo.length > 0 && (
         <div>
           <Heading>교통약자이동지원센터 정보</Heading>
           <Description>
