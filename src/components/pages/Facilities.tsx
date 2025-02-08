@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { fetchWeekPersonFacilitiesData } from '@utils/api';
 
-function Facilites() {
+function Facilities() {
   const [stationData, setStationData] = useState<StationData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -167,4 +167,4 @@ const InfoText = styled.div`
   }
 `;
 
-export default Facilites;
+export default Facilities;
